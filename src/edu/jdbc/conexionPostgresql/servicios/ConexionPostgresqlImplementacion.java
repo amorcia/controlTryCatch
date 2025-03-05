@@ -18,22 +18,18 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 	public Connection generaConexion() {
 
 		Connection conexion = null;
-		String[] parametrosConexion;
+		String[] parametrosConexion = configuracionConexion();// url, user, pass
 		try {
-			parametrosConexion = configuracionConexion(); // url, user, pass
-			boolean esValida;
-
 			if (!parametrosConexion[2].isEmpty()) { // Se controla que los parámetros de conexión se completen
 				// Instancia un objeto de la clase interfaz que se le pasa
 				Class.forName("org.postgresql.Driver");
 
 				// Se establece la conexión
-				// Si pgadmin no tiene abierta la bd, no será posible establecer conexion contra
-				// ella
+				// Si pgadmin no tiene abierta la bd, no será posible establecer conexion contra ella
 
 				conexion = DriverManager.getConnection(parametrosConexion[0], parametrosConexion[1],
 						parametrosConexion[2]);
-				esValida = conexion.isValid(50000);
+				boolean esValida = conexion.isValid(50000);
 				if (esValida == false) {
 					conexion = null;
 				}
@@ -47,9 +43,11 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 				conexion = null;
 			}
 		} catch (SQLException e) {
-			System.err.println("[Método generarConexion - ConexionPostgresqlImplementacion.java] Error en la conexion a la base de datos");
+			System.err.println(
+					"[Método generarConexion - ConexionPostgresqlImplementacion.java] Error en la conexion a la base de datos");
 		} catch (ClassNotFoundException e) {
-			System.err.println("[Método generarConexion - ConexionPostgresqlImplementacion.java] La clase no ha sido bien creada o encontrada");
+			System.err.println(
+					"[Método generarConexion - ConexionPostgresqlImplementacion.java] La clase no ha sido bien creada o encontrada");
 		} catch (Exception e) {
 			throw e;
 		}
@@ -80,11 +78,16 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 			stringConfiguracion[0] = url;
 			stringConfiguracion[1] = user;
 			stringConfiguracion[2] = pass;
+		} catch (FileNotFoundException e) {
+			System.err.println(
+					"[Método configuracionConexion - ConexionPostgresqlImplementacion.java] Error al cargar el archivo/fichero, puede que este no exista");	
 		} catch (IOException e) {
-			System.err.println("[Método configuracionConexion - ConexionPostgresqlImplementacion.java] Error al cargar el archivo/fichero");
+			System.err.println(
+					"[Método configuracionConexion - ConexionPostgresqlImplementacion.java] Error al introducir datos/abrir/cerrar el archivo/fichero");
 		} catch (Exception e) {
 			throw e;
 		}
+	
 		return stringConfiguracion;
 	}
 }
