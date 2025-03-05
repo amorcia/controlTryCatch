@@ -36,7 +36,7 @@ public class Inicio {
 			}
 		}	
 		}catch (Exception e) {
-			System.err.println(e);
+			System.err.println("[Método main - Inicio.controladores] Ha ocurrido un error en la aplicación");
 		}	
 	}
 	
