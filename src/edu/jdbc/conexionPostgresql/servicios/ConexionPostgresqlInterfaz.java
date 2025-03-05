@@ -16,6 +16,6 @@ public interface ConexionPostgresqlInterfaz {
 	 * 220923 - rfg
 	 * @return Conexión a postgresql abierta
 	 */
-	public Connection generaConexion() throws ClassNotFoundException,SQLException,IOException;
+	public Connection generaConexion();
 	
 }

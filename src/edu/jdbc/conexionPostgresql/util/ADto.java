@@ -17,7 +17,7 @@ public class ADto {
 	 * 220923 - rfg
 	 * @return lista de libros
 	 */
-	public ArrayList<LibroDto> resultsALibrosDto(ResultSet resultadoConsulta) throws SQLException{
+	public ArrayList<LibroDto> resultsALibrosDto(ResultSet resultadoConsulta){
 		
 		ArrayList<LibroDto> listaLibros = new ArrayList<>();
 		

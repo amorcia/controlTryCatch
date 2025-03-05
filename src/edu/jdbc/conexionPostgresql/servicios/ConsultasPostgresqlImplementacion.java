@@ -15,7 +15,7 @@ import edu.jdbc.conexionPostgresql.util.ADto;
 public class ConsultasPostgresqlImplementacion implements ConsultasPostgresqlInterfaz {
 
 	@Override
-	public ArrayList<LibroDto> seleccionaTodosLibros(Connection conexionGenerada) throws SQLException {
+	public ArrayList<LibroDto> seleccionaTodosLibros(Connection conexionGenerada) {
 
 		Statement declaracionSQL = null;
 		ResultSet resultadoConsulta = null;

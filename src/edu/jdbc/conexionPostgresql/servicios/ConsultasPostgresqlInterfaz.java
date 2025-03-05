@@ -18,6 +18,6 @@ public interface ConsultasPostgresqlInterfaz {
 	 * @param conexionGenerada
 	 * @return lista de libros
 	 */
-	public ArrayList<LibroDto> seleccionaTodosLibros(Connection conexionGenerada) throws SQLException;
+	public ArrayList<LibroDto> seleccionaTodosLibros(Connection conexionGenerada);
 	
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInterfaz {
 
 	@Override
-	public Connection generaConexion() throws ClassNotFoundException, SQLException, IOException {
+	public Connection generaConexion() {
 
 		Connection conexion = null;
 		String[] parametrosConexion;
@@ -46,8 +46,6 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 						"[ERROR-ConexionPostgresqlImplementacion-generaConexion] Los parametros de conexion no se han establecido correctamente");
 				conexion = null;
 			}
-		} catch (IOException e) {
-			System.err.println("[Método generarConexion - ConexionPostgresqlImplementacion.java] Error a la hora de crear un fichero o acceder a el");
 		} catch (SQLException e) {
 			System.err.println("[Método generarConexion - ConexionPostgresqlImplementacion.java] Error en la conexion a la base de datos");
 		} catch (ClassNotFoundException e) {
@@ -63,7 +61,7 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 	 * conexion_postgresql.properties 221023 - rfg return ventor de string con: url,
 	 * user, pass
 	 */
-	private String[] configuracionConexion() throws IOException {
+	private String[] configuracionConexion() {
 
 		String user = "", pass = "", port = "", host = "", db = "", url = "";
 		String[] stringConfiguracion = { "", "", "" };
