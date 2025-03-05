@@ -40,7 +40,7 @@ public class ConsultasPostgresqlImplementacion implements ConsultasPostgresqlInt
 			declaracionSQL.close();
 			conexionGenerada.close();
 		} catch (SQLException e) {
-			System.err.println("[Método seleccionaTodosLibros - ConexionPostgresqlImplementacion.java] Error en la conexion a la base de datos");
+			System.err.println("[Método seleccionaTodosLibros - ConsultasPostgresqlImplementacion.java] Error en la conexion a la base de datos");
 		} catch (Exception e) {
 			throw e;
 		}
