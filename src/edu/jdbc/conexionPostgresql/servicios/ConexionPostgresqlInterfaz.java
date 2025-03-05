@@ -1,8 +1,6 @@
 package edu.jdbc.conexionPostgresql.servicios;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * Clase que realiza la conexión a PostgreSQL de forma parametrizada
