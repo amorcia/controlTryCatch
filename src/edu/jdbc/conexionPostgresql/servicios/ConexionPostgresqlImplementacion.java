@@ -15,12 +15,17 @@ import java.io.IOException;
 public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInterfaz {
 
 	@Override
-	public Connection generaConexion() {
+	public Connection generaConexion() throws Exception {
 
 		Connection conexion = null;
 		String[] parametrosConexion;
-		try {
-			parametrosConexion = configuracionConexion(); // url, user, pass
+			try {
+				parametrosConexion = configuracionConexion();// url, user, pass
+			} catch (IOException e) {
+				System.err.println(
+						"[Método generarConexion - ConexionPostgresqlImplementacion.java] Error al conectar con el fichero");
+				parametrosConexion = new String[3];
+			} 
 			if (!parametrosConexion[2].isEmpty()) { // Se controla que los parámetros de conexión se completen
 				try {
 					// Instancia un objeto de la clase interfaz que se le pasa
@@ -45,17 +50,12 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 				} catch (ClassNotFoundException e) {
 					System.err.println(
 							"[Método generarConexion - ConexionPostgresqlImplementacion.java] La clase no ha sido bien creada o encontrada");
-				} catch (Exception e) {
-					throw e;
-				}
+				} 
 			} else {
 				System.out.println(
 						"[ERROR-ConexionPostgresqlImplementacion-generaConexion] Los parametros de conexion no se han establecido correctamente");
 				conexion = null;
 			}
-		} catch (Exception e) {
-			throw e;
-		}
 		return conexion;
 	}
 
@@ -63,15 +63,16 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 	 * Método configura los parámetros de la conexión de
 	 * conexion_postgresql.properties 221023 - rfg return ventor de string con: url,
 	 * user, pass
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	private String[] configuracionConexion() {
+	private String[] configuracionConexion() throws FileNotFoundException, IOException {
 
 		String user = "", pass = "", port = "", host = "", db = "", url = "";
 		String[] stringConfiguracion = { "", "", "" };
 
 		Properties propiedadesConexion = new Properties();
-
-		try {
+		
 			propiedadesConexion.load(new FileInputStream(new File(
 					"C:\\Users\\Trabajo\\dws-workspace\\edu.jdbc.crud\\src\\edu\\jdbc\\crud\\util\\conexion_postgresql.properties")));
 			user = propiedadesConexion.getProperty("user");
@@ -83,16 +84,7 @@ public class ConexionPostgresqlImplementacion implements ConexionPostgresqlInter
 			stringConfiguracion[0] = url;
 			stringConfiguracion[1] = user;
 			stringConfiguracion[2] = pass;
-		} catch (FileNotFoundException e) {
-			System.err.println(
-					"[Método configuracionConexion - ConexionPostgresqlImplementacion.java] Error al cargar el archivo/fichero, puede que este no exista");
-		} catch (IOException e) {
-			System.err.println(
-					"[Método configuracionConexion - ConexionPostgresqlImplementacion.java] Error al introducir datos/abrir/cerrar el archivo/fichero");
-		} catch (Exception e) {
-			throw e;
-		}
-
+		
 		return stringConfiguracion;
 	}
 }

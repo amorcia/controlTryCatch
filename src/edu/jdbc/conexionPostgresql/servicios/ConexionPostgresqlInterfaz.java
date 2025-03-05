@@ -14,6 +14,6 @@ public interface ConexionPostgresqlInterfaz {
 	 * 220923 - rfg
 	 * @return Conexión a postgresql abierta
 	 */
-	public Connection generaConexion();
+	public Connection generaConexion() throws Exception;
 	
 }
